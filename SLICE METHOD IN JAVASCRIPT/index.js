@@ -1,26 +1,29 @@
-// Understanding the Basics
-let fruits = ['apple', 'banana', 'orange', 'grape', 'kiwi'];
+import React, { useState } from 'react';
 
-// Extract elements from index 1 to 3 (exclusive)
-let citrus = fruits.slice(1, 4);
-console.log(citrus); // Output: ['banana', 'orange', 'grape']
+// Child Component
+function ChildComponent(props) {
+  return (
+    <div>
+      <p>Name: {props.user.name}</p>
+      <p>Age: {props.user.age}</p>
+    </div>
+  );
+}
 
-// Omitting the 'end' parameter extracts from the start index to the end
-let subset = fruits.slice(2);
-console.log(subset); // Output: ['orange', 'grape', 'kiwi']
+// Parent Component
+function App() {
+  const [user, setUser] = useState({ name: 'John', age: 25 });
 
-// Negative Indices
-let colors = ['red', 'blue', 'green', 'yellow', 'purple'];
+  const handleButtonClick = () => {
+    console.log('Button clicked in parent component!');
+  };
 
-// Extract elements from the third-to-last to the second-to-last
-let extractedColors = colors.slice(-3, -1);
-console.log(extractedColors); // Output: ['green', 'yellow']
+  return (
+    <div>
+      <ChildComponent user={user} />
+      <button onClick={handleButtonClick}>Click me</button>
+    </div>
+  );
+}
 
-// Immutable Nature of slice()
-let originalArray = [1, 2, 3, 4, 5];
-
-// Extract elements without modifying the original array
-let extractedArray = originalArray.slice(1, 4);
-
-console.log(originalArray); // Output: [1, 2, 3, 4, 5]
-console.log(extractedArray); // Output: [2, 3, 4]
+export default App;
